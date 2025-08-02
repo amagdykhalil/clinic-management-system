@@ -1,0 +1,19 @@
+services:
+  cms.api:
+    image: ${DOCKER_REGISTRY-}cmsapi
+    container_name: cms-api
+    depends_on:
+      - cms.seq
+    build:
+      context: .
+      dockerfile: src/API/cms.API/Dockerfile
+
+  cms.seq:
+    image: datalust/seq:latest
+    container_name: cms-seq
+    ports:
+      - "5341:5341"
+      - "8081:80"
+    environment:
+      - ACCEPT_EULA=Y
+
