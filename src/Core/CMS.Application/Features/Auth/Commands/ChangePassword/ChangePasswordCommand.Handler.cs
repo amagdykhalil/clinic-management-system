@@ -11,7 +11,7 @@ namespace CMS.Application.Features.Auth.Commands.ChangePassword
     {
         public async Task<Result> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
         {
-            var user = await identityService.GetUserByIdIncludePersonAsync(request.UserId, cancellationToken);
+            var user = await identityService.GetUserByIdAsync(request.UserId, cancellationToken);
             if (user is null)
             {
                 return Result.Error("User not found.");

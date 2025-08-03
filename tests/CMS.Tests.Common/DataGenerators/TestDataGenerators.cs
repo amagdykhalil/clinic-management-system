@@ -8,13 +8,13 @@ namespace CMS.Tests.Common.DataGenerators
     public static class TestDataGenerators
     {
 
-        public static Faker<Domain.Entities.Person> PersonFaker() => new Faker<Domain.Entities.Person>()
-            .RuleFor(p => p.Id, f => 0)
-            .RuleFor(p => p.FirstName, f => f.Name.FirstName())
-            .RuleFor(p => p.LastName, f => f.Name.LastName());
 
-        public static Faker<User> UserFaker(Domain.Entities.Person? person = null) => new Faker<User>()
+        public static Faker<User> UserFaker() => new Faker<User>()
             .RuleFor(u => u.Id, f => 0)
+            .RuleFor(p => p.FirstName, f => f.Name.FirstName())
+            .RuleFor(p => p.SecondName, f => f.Name.FirstName())
+            .RuleFor(p => p.ThirdName, f => f.Name.FirstName())
+            .RuleFor(p => p.LastName, f => f.Name.LastName())
             .RuleFor(u => u.UserName, f => $"user_{f.UniqueIndex}")
             .RuleFor(u => u.Email, (f, u) => $"{u.UserName}@example.com")
             .RuleFor(u => u.EmailConfirmed, f => true)

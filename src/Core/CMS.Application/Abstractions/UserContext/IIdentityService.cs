@@ -18,7 +18,6 @@ namespace CMS.Application.Abstractions.UserContext
 
         // User management methods
         Task<User?> GetUserByIdAsync(int userId, CancellationToken cancellationToken = default);
-        Task<User?> GetUserByIdIncludePersonAsync(int userId, CancellationToken cancellationToken = default);
         Task<IdentityResult> UpdateUserAsync(User user, CancellationToken cancellationToken = default);
         Task<IdentityResult> DeleteUserAsync(User user, CancellationToken cancellationToken = default);
         Task<IdentityResult> ChangePasswordAsync(User user, string currentPassword, string newPassword, CancellationToken cancellationToken = default);
@@ -26,7 +25,6 @@ namespace CMS.Application.Abstractions.UserContext
         // Email confirmation methods
         Task<User?> FindByIdAsync(string userId, CancellationToken cancellationToken = default);
         Task<User?> FindByEmailAsync(string email, CancellationToken cancellationToken = default);
-        Task<User?> FindByEmailIncludePersonAsync(string email, CancellationToken cancellationToken = default);
         Task<bool> IsEmailConfirmedAsync(User user, CancellationToken cancellationToken = default);
         Task<IdentityResult> ConfirmEmailAsync(User user, string code, CancellationToken cancellationToken = default);
         Task<IdentityResult> ChangeEmailAsync(User user, string newEmail, string code, CancellationToken cancellationToken = default);

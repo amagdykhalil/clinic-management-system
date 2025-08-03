@@ -13,7 +13,7 @@ namespace CMS.Application.Features.Auth.Commands.ResetPassword
     {
         public async Task<Result> Handle(ResetPasswordCommand request, CancellationToken cancellationToken)
         {
-            var user = await identityService.FindByEmailIncludePersonAsync(request.Email, cancellationToken);
+            var user = await identityService.FindByEmailAsync(request.Email, cancellationToken);
 
             if (user is null || !(await identityService.IsEmailConfirmedAsync(user, cancellationToken)))
             {

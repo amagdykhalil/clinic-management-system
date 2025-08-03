@@ -25,7 +25,7 @@ namespace CMS.Persistence.Repositories
 
         public async Task<RefreshToken?> GetActiveRefreshTokenAsync(int userId, CancellationToken cancellationToken = default)
         {
-            return await _context.RefreshTokens.FirstOrDefaultAsync(r => r.RevokedOn == null && r.ExpiresOn > _dateTimeProvider.UtcNow && r.UserId == userId, cancellationToken);
+            return await _context.RefreshTokens.FirstOrDefaultAsync(r => r.UserId == userId && r.RevokedOn == null && r.ExpiresOn > _dateTimeProvider.UtcNow , cancellationToken);
         }
 
         public RefreshToken GenerateRefreshToken(int userId)

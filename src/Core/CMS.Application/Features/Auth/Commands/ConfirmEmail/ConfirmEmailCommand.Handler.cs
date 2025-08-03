@@ -13,7 +13,7 @@ namespace CMS.Application.Features.Auth.Commands.ConfirmEmail
     {
         public async Task<Result<string>> Handle(ConfirmEmailCommand request, CancellationToken cancellationToken)
         {
-            var user = await identityService.GetUserByIdIncludePersonAsync(request.UserId, cancellationToken);
+            var user = await identityService.GetUserByIdAsync(request.UserId, cancellationToken);
 
             if (user == null)
             {

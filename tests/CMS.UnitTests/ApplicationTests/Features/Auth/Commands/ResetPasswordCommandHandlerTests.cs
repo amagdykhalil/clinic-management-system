@@ -38,7 +38,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             var encodedCode = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
             var command = new ResetPasswordCommand(_user.Email, encodedCode, "NewPassword123!");
 
-            _identityServiceMock.Setup(x => x.FindByEmailIncludePersonAsync(command.Email, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.FindByEmailAsync(command.Email, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
             _identityServiceMock.Setup(x => x.IsEmailConfirmedAsync(_user, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(true);
@@ -62,7 +62,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             // Arrange
             var command = new ResetPasswordCommand("notfound@example.com", "code", "NewPassword123!");
 
-            _identityServiceMock.Setup(x => x.FindByEmailIncludePersonAsync(command.Email, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.FindByEmailAsync(command.Email, It.IsAny<CancellationToken>()))
                 .ReturnsAsync((User?)null);
 
             // Act
@@ -79,7 +79,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             // Arrange
             var command = new ResetPasswordCommand(_user.Email, "code", "NewPassword123!");
 
-            _identityServiceMock.Setup(x => x.FindByEmailIncludePersonAsync(command.Email, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.FindByEmailAsync(command.Email, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
             _identityServiceMock.Setup(x => x.IsEmailConfirmedAsync(_user, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(false);
@@ -98,7 +98,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             // Arrange
             var command = new ResetPasswordCommand(_user.Email, "invalid-format", "NewPassword123!");
 
-            _identityServiceMock.Setup(x => x.FindByEmailIncludePersonAsync(command.Email, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.FindByEmailAsync(command.Email, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
             _identityServiceMock.Setup(x => x.IsEmailConfirmedAsync(_user, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(true);
@@ -120,7 +120,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             var command = new ResetPasswordCommand(_user.Email, encodedCode, "NewPassword123!");
             var failedResult = IdentityResult.Failed(new IdentityError { Description = "Invalid code" });
 
-            _identityServiceMock.Setup(x => x.FindByEmailIncludePersonAsync(command.Email, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.FindByEmailAsync(command.Email, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
             _identityServiceMock.Setup(x => x.IsEmailConfirmedAsync(_user, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(true);
@@ -142,7 +142,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             var command = new ResetPasswordCommand(_user.Email, "", "NewPassword123!");
             var failedResult = IdentityResult.Failed(new IdentityError { Description = "Invalid code" });
 
-            _identityServiceMock.Setup(x => x.FindByEmailIncludePersonAsync(command.Email, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.FindByEmailAsync(command.Email, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
             _identityServiceMock.Setup(x => x.IsEmailConfirmedAsync(_user, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(true);
@@ -166,7 +166,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             var command = new ResetPasswordCommand(_user.Email, encodedCode, "NewPassword123!");
             var resetLink = "https://example.com/reset-password";
 
-            _identityServiceMock.Setup(x => x.FindByEmailIncludePersonAsync(command.Email, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.FindByEmailAsync(command.Email, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
             _identityServiceMock.Setup(x => x.IsEmailConfirmedAsync(_user, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(true);

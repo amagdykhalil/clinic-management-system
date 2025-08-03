@@ -38,7 +38,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             var encodedCode = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
             var command = new ConfirmEmailCommand { UserId = _user.Id, Code = encodedCode };
 
-            _identityServiceMock.Setup(x => x.GetUserByIdIncludePersonAsync(command.UserId, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.GetUserByIdAsync(command.UserId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
 
             _identityServiceMock.Setup(x => x.ConfirmEmailAsync(_user, code, It.IsAny<CancellationToken>()))
@@ -60,7 +60,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             var encodedCode = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
             var command = new ConfirmEmailCommand { UserId = 999, Code = encodedCode };
 
-            _identityServiceMock.Setup(x => x.GetUserByIdIncludePersonAsync(command.UserId, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.GetUserByIdAsync(command.UserId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync((User?)null);
 
             // Act
@@ -77,7 +77,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             // Arrange
             var command = new ConfirmEmailCommand { UserId = _user.Id, Code = "invalid-format" };
 
-            _identityServiceMock.Setup(x => x.GetUserByIdIncludePersonAsync(command.UserId, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.GetUserByIdAsync(command.UserId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
 
             // Act
@@ -97,7 +97,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             var command = new ConfirmEmailCommand { UserId = _user.Id, Code = encodedCode };
             var failedResult = IdentityResult.Failed(new IdentityError { Description = "Invalid code" });
 
-            _identityServiceMock.Setup(x => x.GetUserByIdIncludePersonAsync(command.UserId, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.GetUserByIdAsync(command.UserId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
 
             _identityServiceMock.Setup(x => x.ConfirmEmailAsync(_user, code, It.IsAny<CancellationToken>()))
@@ -122,7 +122,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
 
             _user.PasswordHash = null; // User has no password
 
-            _identityServiceMock.Setup(x => x.GetUserByIdIncludePersonAsync(command.UserId, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.GetUserByIdAsync(command.UserId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
 
             _identityServiceMock.Setup(x => x.ConfirmEmailAsync(_user, code, It.IsAny<CancellationToken>()))
@@ -150,7 +150,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             var newEmail = "newemail@example.com";
             var command = new ConfirmEmailCommand { UserId = _user.Id, Code = encodedCode, ChangedEmail = newEmail };
 
-            _identityServiceMock.Setup(x => x.GetUserByIdIncludePersonAsync(command.UserId, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.GetUserByIdAsync(command.UserId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
 
             _identityServiceMock.Setup(x => x.ChangeEmailAsync(_user, newEmail, code, It.IsAny<CancellationToken>()))
@@ -182,7 +182,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
 
             _user.PasswordHash = null; // User has no password
 
-            _identityServiceMock.Setup(x => x.GetUserByIdIncludePersonAsync(command.UserId, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.GetUserByIdAsync(command.UserId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
 
             _identityServiceMock.Setup(x => x.ChangeEmailAsync(_user, newEmail, code, It.IsAny<CancellationToken>()))
@@ -213,7 +213,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             var encodedCode = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));
             var command = new ConfirmEmailCommand { UserId = _user.Id, Code = encodedCode, ChangedEmail = "" };
 
-            _identityServiceMock.Setup(x => x.GetUserByIdIncludePersonAsync(command.UserId, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.GetUserByIdAsync(command.UserId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
 
             _identityServiceMock.Setup(x => x.ConfirmEmailAsync(_user, code, It.IsAny<CancellationToken>()))

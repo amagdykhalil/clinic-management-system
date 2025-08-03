@@ -40,7 +40,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             var command = new ChangePasswordCommand(_user.Id, "OldPassword123!", "NewPassword123!");
             var resetLink = "https://example.com/reset-password";
 
-            _identityServiceMock.Setup(x => x.GetUserByIdIncludePersonAsync(command.UserId, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.GetUserByIdAsync(command.UserId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
 
             _identityServiceMock.Setup(x => x.CheckPasswordAsync(_user.Email, command.OldPassword, It.IsAny<CancellationToken>()))
@@ -67,7 +67,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             // Arrange
             var command = new ChangePasswordCommand(999, "OldPassword123!", "NewPassword123!");
 
-            _identityServiceMock.Setup(x => x.GetUserByIdIncludePersonAsync(command.UserId, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.GetUserByIdAsync(command.UserId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync((User?)null);
 
             // Act
@@ -89,7 +89,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             // Arrange
             var command = new ChangePasswordCommand(_user.Id, "WrongPassword123!", "NewPassword123!");
 
-            _identityServiceMock.Setup(x => x.GetUserByIdIncludePersonAsync(command.UserId, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.GetUserByIdAsync(command.UserId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
 
             _identityServiceMock.Setup(x => x.CheckPasswordAsync(_user.Email, command.OldPassword, It.IsAny<CancellationToken>()))
@@ -113,7 +113,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             var command = new ChangePasswordCommand(_user.Id, "OldPassword123!", "NewPassword123!");
             var failedResult = IdentityResult.Failed(new IdentityError { Description = "Password does not meet requirements" });
 
-            _identityServiceMock.Setup(x => x.GetUserByIdIncludePersonAsync(command.UserId, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.GetUserByIdAsync(command.UserId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
 
             _identityServiceMock.Setup(x => x.CheckPasswordAsync(_user.Email, command.OldPassword, It.IsAny<CancellationToken>()))
@@ -142,7 +142,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             var command = new ChangePasswordCommand(_user.Id, "OldPassword123!", "NewPassword123!");
             var resetLink = "https://example.com/reset-password";
 
-            _identityServiceMock.Setup(x => x.GetUserByIdIncludePersonAsync(command.UserId, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.GetUserByIdAsync(command.UserId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
 
             _identityServiceMock.Setup(x => x.CheckPasswordAsync(_user.Email, command.OldPassword, It.IsAny<CancellationToken>()))

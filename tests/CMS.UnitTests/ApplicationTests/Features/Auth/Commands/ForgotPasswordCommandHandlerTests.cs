@@ -34,7 +34,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             // Arrange  
             var command = new ForgotPasswordCommand(_user.Email);
 
-            _identityServiceMock.Setup(x => x.FindByEmailIncludePersonAsync(command.Email, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.FindByEmailAsync(command.Email, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
             _identityServiceMock.Setup(x => x.IsEmailConfirmedAsync(_user, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(true);
@@ -53,7 +53,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             // Arrange  
             var command = new ForgotPasswordCommand("notfound@example.com");
 
-            _identityServiceMock.Setup(x => x.FindByEmailIncludePersonAsync(command.Email, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.FindByEmailAsync(command.Email, It.IsAny<CancellationToken>()))
                 .ReturnsAsync((User?)null);
 
             // Act  
@@ -70,7 +70,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             // Arrange  
             var command = new ForgotPasswordCommand(_user.Email);
 
-            _identityServiceMock.Setup(x => x.FindByEmailIncludePersonAsync(command.Email, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.FindByEmailAsync(command.Email, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
             _identityServiceMock.Setup(x => x.IsEmailConfirmedAsync(_user, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(false);

@@ -38,7 +38,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             _identityServiceMock.Setup(x => x.IsExitsByEmail(newEmail, It.IsAny<CancellationToken>()))
                 .ReturnsAsync((int?)null);
 
-            _identityServiceMock.Setup(x => x.GetUserByIdIncludePersonAsync(command.UserId, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.GetUserByIdAsync(command.UserId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
 
             _userActionLinkBuilderMock.Setup(x => x.BuildChangeEmailConfirmationLinkAsync(_user, newEmail, It.IsAny<CancellationToken>()))
@@ -68,7 +68,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
 
             // Assert
             Assert.True(result.IsSuccess);
-            _identityServiceMock.Verify(x => x.GetUserByIdIncludePersonAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()), Times.Never);
+            _identityServiceMock.Verify(x => x.GetUserByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()), Times.Never);
             _userActionLinkBuilderMock.Verify(x => x.BuildChangeEmailConfirmationLinkAsync(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Never);
             _userEmailServiceMock.Verify(x => x.SendConfirmationLinkAsync(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>()), Times.Never);
         }
@@ -83,7 +83,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             _identityServiceMock.Setup(x => x.IsExitsByEmail(newEmail, It.IsAny<CancellationToken>()))
                 .ReturnsAsync((int?)null);
 
-            _identityServiceMock.Setup(x => x.GetUserByIdIncludePersonAsync(command.UserId, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.GetUserByIdAsync(command.UserId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync((User?)null);
 
             // Act
@@ -110,7 +110,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
 
             // Assert
             Assert.True(result.IsSuccess);
-            _identityServiceMock.Verify(x => x.GetUserByIdIncludePersonAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()), Times.Never);
+            _identityServiceMock.Verify(x => x.GetUserByIdAsync(It.IsAny<int>(), It.IsAny<CancellationToken>()), Times.Never);
             _userActionLinkBuilderMock.Verify(x => x.BuildChangeEmailConfirmationLinkAsync(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<CancellationToken>()), Times.Never);
             _userEmailServiceMock.Verify(x => x.SendConfirmationLinkAsync(It.IsAny<User>(), It.IsAny<string>(), It.IsAny<string>()), Times.Never);
         }
@@ -126,7 +126,7 @@ namespace CMS.Application.Tests.Features.Auth.Commands
             _identityServiceMock.Setup(x => x.IsExitsByEmail(newEmail, It.IsAny<CancellationToken>()))
                 .ReturnsAsync((int?)null);
 
-            _identityServiceMock.Setup(x => x.GetUserByIdIncludePersonAsync(command.UserId, It.IsAny<CancellationToken>()))
+            _identityServiceMock.Setup(x => x.GetUserByIdAsync(command.UserId, It.IsAny<CancellationToken>()))
                 .ReturnsAsync(_user);
 
             _userActionLinkBuilderMock.Setup(x => x.BuildChangeEmailConfirmationLinkAsync(_user, newEmail, It.IsAny<CancellationToken>()))

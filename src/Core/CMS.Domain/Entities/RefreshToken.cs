@@ -1,3 +1,5 @@
+using System.ComponentModel.DataAnnotations.Schema;
+
 namespace CMS.Domain.Entities
 {
     public class RefreshToken : Entity
@@ -6,9 +8,12 @@ namespace CMS.Domain.Entities
         public int UserId { get; set; }
         public User User { get; set; }
         public DateTime ExpiresOn { get; set; }
+        [NotMapped]
         public bool IsExpired => DateTime.UtcNow >= ExpiresOn;
         public DateTime CreatedOn { get; set; }
         public DateTime? RevokedOn { get; set; }
+
+        [NotMapped]
         public bool IsActive => RevokedOn is null && !IsExpired;
     }
 }

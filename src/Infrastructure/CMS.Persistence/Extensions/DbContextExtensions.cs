@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using CMS.Persistence.Data.Interceptors;
 using CMS.Persistence.Interceptors;
+using System.Diagnostics;
 
 namespace CMS.Persistence.Extensions
 {
@@ -12,7 +13,8 @@ namespace CMS.Persistence.Extensions
         {
 
             services.AddScoped<SoftDeleteInterceptor>();
-            services.AddScoped<UpdateAuditableInterceptor>();
+            services.AddScoped<UpdateInterceptor>();
+            services.AddScoped<CreateInterceptor>();
 
             services.AddDbContext<AppDbContext>((provider, options) =>
             {
@@ -22,7 +24,8 @@ namespace CMS.Persistence.Extensions
                     // Resolve interceptors from the container
                     .AddInterceptors(
                         provider.GetRequiredService<SoftDeleteInterceptor>(),
-                        provider.GetRequiredService<UpdateAuditableInterceptor>()
+                        provider.GetRequiredService<UpdateInterceptor>(),
+                        provider.GetRequiredService<CreateInterceptor>()
                     )
                     .LogTo(Console.WriteLine, LogLevel.Information);
 

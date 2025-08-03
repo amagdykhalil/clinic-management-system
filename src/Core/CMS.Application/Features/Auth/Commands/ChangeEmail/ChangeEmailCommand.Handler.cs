@@ -29,7 +29,7 @@ namespace CMS.Application.Features.Auth.Commands.ChangeEmail
             }
 
             // Find current user
-            var user = await _identityService.GetUserByIdIncludePersonAsync(request.UserId, cancellationToken);
+            var user = await _identityService.GetUserByIdAsync(request.UserId, cancellationToken);
             if (user == null)
             {
                 return Result.Success();

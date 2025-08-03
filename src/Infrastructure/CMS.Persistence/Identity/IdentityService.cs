@@ -90,14 +90,6 @@ namespace CMS.Persistence.Identity
             return await _userManager.FindByIdAsync(userId.ToString());
         }
 
-        public async Task<User?> GetUserByIdIncludePersonAsync(int userId, CancellationToken cancellationToken = default)
-        {
-            var user = await _userManager.Users
-                .Include(u => u.Person)
-                .FirstOrDefaultAsync(u => u.Id == userId, cancellationToken);
-
-            return user; // Return the user or null if not found
-        }
 
         public async Task<IdentityResult> UpdateUserAsync(User user, CancellationToken cancellationToken = default)
         {
@@ -182,11 +174,6 @@ namespace CMS.Persistence.Identity
             {
                 _context.Set<IdentityRole<int>>().RemoveRange(roles);
             }
-        }
-
-        public async Task<User?> FindByEmailIncludePersonAsync(string email, CancellationToken cancellationToken = default)
-        {
-            return await _userManager.Users.Include(e => e.Person).Where(u => u.Email == email).FirstOrDefaultAsync(cancellationToken);
         }
 
 

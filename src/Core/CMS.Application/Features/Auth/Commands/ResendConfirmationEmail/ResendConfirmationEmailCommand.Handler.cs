@@ -22,7 +22,7 @@ namespace CMS.Application.Features.Auth.Commands.ResendConfirmationEmail
 
         public async Task<Result> Handle(ResendConfirmationEmailCommand request, CancellationToken cancellationToken)
         {
-            var user = await _identityService.FindByEmailIncludePersonAsync(request.Email, cancellationToken);
+            var user = await _identityService.FindByEmailAsync(request.Email, cancellationToken);
 
             if (user == null)
             {

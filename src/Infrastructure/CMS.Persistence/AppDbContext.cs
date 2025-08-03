@@ -12,7 +12,14 @@ namespace CMS.Persistence
         {
         }
 
-        public DbSet<Person> People { get; set; }
+        public DbSet<Appointment> Appointments { get; set; }
+        public DbSet<Doctor> Doctors { get; set; }
+        public DbSet<MedicalDocument> MedicalDocuments { get; set; }
+        public DbSet<MedicalRecord> MedicalRecords { get; set; }
+        public DbSet<Patient> Patients { get; set; }
+        public DbSet<Prescription> Prescriptions { get; set; }
+        public DbSet<Service> Services { get; set; }
+        public DbSet<Specialty> Specialties { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

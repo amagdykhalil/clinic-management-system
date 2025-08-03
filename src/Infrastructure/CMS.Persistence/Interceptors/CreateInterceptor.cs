@@ -1,14 +1,19 @@
-using CMS.Application.Abstractions.UserContext;
+﻿using CMS.Application.Abstractions.UserContext;
 using CMS.Domain.Interfaces;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace CMS.Persistence.Interceptors
 {
-    public sealed class UpdateAuditableInterceptor : SaveChangesInterceptor
+    public class CreateInterceptor : SaveChangesInterceptor
     {
         private readonly IUserContext _userContext;
-        public UpdateAuditableInterceptor(IUserContext userContext)
+        public CreateInterceptor(IUserContext userContext)
         {
             _userContext = userContext;
         }
@@ -23,34 +28,25 @@ namespace CMS.Persistence.Interceptors
                     eventData, result, cancellationToken);
             }
 
-            UpdateAuditableEntities(eventData.Context);
+            CreateEntities(eventData.Context);
 
             return base.SavingChangesAsync(eventData, result, cancellationToken);
         }
 
-        private void UpdateAuditableEntities(DbContext context)
+        private void CreateEntities(DbContext context)
         {
             DateTime utcNow = DateTime.UtcNow;
-            var entities = context.ChangeTracker.Entries<IAuditable>().ToList();
+            var entities = context.ChangeTracker.Entries<ICreationTrackable>().ToList();
 
-            foreach (EntityEntry<IAuditable> entry in entities)
+            foreach (EntityEntry<ICreationTrackable> entry in entities)
             {
                 if (entry.State == EntityState.Added)
                 {
                     entry.Entity.CreatedAt = utcNow;
                     entry.Entity.CreatedBy = _userContext.UserId;
                 }
-
-                if (entry.State == EntityState.Modified)
-                {
-                    entry.Entity.LastModifiedAt = utcNow;
-                    entry.Entity.LastModifiedBy = _userContext.UserId;
-                }
             }
 
         }
     }
 }
-
-
-

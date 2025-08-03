@@ -21,7 +21,7 @@ namespace CMS.Application.Features.Auth.Commands.ForgotPassword
 
         public async Task<Result> Handle(ForgotPasswordCommand request, CancellationToken cancellationToken)
         {
-            var user = await _identityService.FindByEmailIncludePersonAsync(request.Email, cancellationToken);
+            var user = await _identityService.FindByEmailAsync(request.Email, cancellationToken);
 
             if (user is not null && await _identityService.IsEmailConfirmedAsync(user, cancellationToken))
             {

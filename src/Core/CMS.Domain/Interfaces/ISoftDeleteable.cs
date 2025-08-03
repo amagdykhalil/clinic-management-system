@@ -1,10 +1,13 @@
+using CMS.Domain.Entities;
+
 namespace CMS.Domain.Interfaces
 {
     public interface ISoftDeleteable
     {
-        public bool IsDeleted => DeletedAt.HasValue;
-        public DateTime? DeletedAt { get; set; }
-        public int? DeletedBy { get; set; }
+         bool IsDeleted => DeletedAt.HasValue;
+         DateTime? DeletedAt { get; set; }
+         int? DeletedBy { get; set; }
+         User? DeletedByUser { get; set; }
     }
 }
 

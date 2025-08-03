@@ -22,7 +22,7 @@ namespace CMS.Infrastructure.Email
                 "EmailConfirmation",
                 new[]
                 {
-                        new Placeholder("UserName", user.Person.FirstName + " " + user.Person.LastName),
+                        new Placeholder("UserName", user.FirstName + " " + user.LastName),
                         new Placeholder("ConfirmationLink", confirmationLink)
                 },
                 new EmailAddress("noreply@arc.com", "CMS Team"),
@@ -39,7 +39,7 @@ namespace CMS.Infrastructure.Email
                 "PasswordReset",
                 new[]
                 {
-                        new Placeholder("UserName", user.Person.FirstName + " " + user.Person.LastName),
+                        new Placeholder("UserName", user.FirstName + " " + user.LastName),
                         new Placeholder("ResetLink", resetLink)
                 },
                 new EmailAddress("noreply@arc.com", "CMS Team"),
@@ -56,7 +56,7 @@ namespace CMS.Infrastructure.Email
                 "WelcomeAndConfirm",
                 new[]
                 {
-                        new Placeholder("UserName", user.Person.FirstName + " " + user.Person.LastName),
+                        new Placeholder("UserName", user.FirstName + " " + user.LastName),
                         new Placeholder("ConfirmationLink", confirmationLink)
                 },
                 new EmailAddress("noreply@arc.com", "CMS Team"),
@@ -73,7 +73,7 @@ namespace CMS.Infrastructure.Email
                 "CreatePassword",
                 new[]
                 {
-                        new Placeholder("UserName", user.Person.FirstName + " " + user.Person.LastName),
+                        new Placeholder("UserName", user.FirstName + " " + user.LastName),
                         new Placeholder("ResetLink", createPasswordLink)
                 },
                 new EmailAddress("noreply@arc.com", "CMS Team"),
@@ -90,7 +90,7 @@ namespace CMS.Infrastructure.Email
                 "PasswordChanged",
                 new[]
                 {
-                        new Placeholder("UserName", user.Person.FirstName + " " + user.Person.LastName),
+                        new Placeholder("UserName", user.FirstName + " " + user.LastName),
                         new Placeholder("ResetLink", resetLink)
                 },
                 new EmailAddress("noreply@arc.com", "CMS Team"),
@@ -107,7 +107,7 @@ namespace CMS.Infrastructure.Email
                 "EmailChanged",
                 new[]
                 {
-                        new Placeholder("UserName", user.Person.FirstName + " " + user.Person.LastName),
+                        new Placeholder("UserName", user.FirstName + " " + user.LastName),
                         new Placeholder("NewEmail", newEmail)
                 },
                 new EmailAddress("noreply@arc.com", "CMS Team"),
